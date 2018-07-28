@@ -1,4 +1,4 @@
-# Jekyll LazyLoadImage
+# Jekyll LazyLoadImage [![Build Status](https://travis-ci.org/kenchan0130/jekyll-lazy-load-image.svg?branch=master)](https://travis-ci.org/kenchan0130/jekyll-lazy-load-image)
 
 _Edit img tag optimized lazy load images for your Jekyll site_
 
@@ -52,7 +52,7 @@ See also: https://jekyllrb.com/docs/plugins/#hooks
 ### Select lazy load library
 
 Select your favorite library and add your site. For example:
-  - [Recommend] [lazysizes](https://github.com/aFarkas/lazysizes)
+  - [lazysizes](https://github.com/aFarkas/lazysizes) [Recommend]
   - [Echo.js](https://github.com/toddmotto/echo)
   - [TADA](https://github.com/fallroot/tada)
   
