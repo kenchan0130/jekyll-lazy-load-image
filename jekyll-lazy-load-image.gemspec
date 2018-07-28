@@ -2,16 +2,15 @@
 
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "jekyll/lazy-load-image/version"
+require "jekyll-lazy-load-image/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "jekyll-lazy-load-image"
   spec.version       = Jekyll::LazyLoadImage::VERSION
   spec.authors       = ["Tadayuki Onishi"]
   spec.email         = ["tt.tanishi100@gmail.com"]
-  spec.summary       = ""
-  spec.description   = ""
-  spec.homepage      = ""
+  spec.summary       = "Edit img tag optimized lazy load images for your Jekyll site"
+  spec.homepage      = "https://github.com/kenchan0130/jekyll-lazy-load-image"
   spec.license       = "MIT"
 
   spec.files         = Dir.chdir(File.expand_path(__dir__)) do
@@ -19,9 +18,9 @@ Gem::Specification.new do |spec|
       f.match(%r!^(test|spec|features)/!)
     end
   end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r!^exe/!) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
+
+  spec.required_ruby_version = ">= 2.4.0"
 
   spec.add_dependency "jekyll", "~> 3.8"
   spec.add_dependency "nokogiri", "~> 1.8"

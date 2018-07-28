@@ -5,9 +5,9 @@ require "nokogiri"
 module Jekyll
   module LazyLoadImage
     class Translator
-      def initialize(document, config)
+      def initialize(document, site_config)
         @document = document
-        @config = config
+        @site_config = site_config
       end
 
       def translate
@@ -17,23 +17,13 @@ module Jekyll
           inject_class_attr(node)
           inject_additional_attrs(node)
         end
-        nokogiri_doc.to_html
+        nokogiri_doc.to_html.gsub(/[\r\n]/, "")
       end
 
       private
 
       def ignore_node?(node)
-        return false if config.ignore.empty?
-
-        found_node_size = if config.ignore.selector_type.css?
-                            node.css(config.ignore.selector).size
-                          elsif config.ignore.selector_type.xpath?
-                            node.xpath(config.ignore.selector).size
-                          else
-                            raise "There may be a change in specifications in ignore selector type."
-                          end
-
-        found_node_size.positive?
+        !@site_config.ignore_selectors.empty? && node.matches?(*@site_config.ignore_selectors)
       end
 
       def apply_lazy_image_setting(node)
@@ -41,36 +31,41 @@ module Jekyll
         return if node_src_attr.nil?
 
         src_value = node_src_attr.value
-        if config.preload_image.empty?
+        if @site_config.preload_image.empty?
           node.remove_attribute("src")
         else
-          node.attributes["src"].value = config.preload_image
+          node.attributes["src"].value = @site_config.preload_image
         end
 
-        node.set_attribute(config.src_attr_name, src_value)
+        node.set_attribute(@site_config.src_attr_name, src_value)
       end
 
       def inject_class_attr(node)
         class_value = node.attributes["class"]&.value
-        return if class_value.nil? && config.class_attr_values.empty?
+        return if class_value.nil? && @site_config.class_attr_values.empty?
 
         node.set_attribute("class", "") if class_value.nil?
         node_class_attr = node.attributes["class"]
-        class_array_option = [node_class_attr.value, config.class_attr_values].flatten
+        class_array_option = [node_class_attr.value, @site_config.class_attr_values].flatten
         class_array = class_array_option.reject do |class_name|
           class_name.nil? || class_name.empty?
         end
-        node_class_attr.value = class_array.join(" ")
+
+        node_class_attr.value = normalize_class_array(class_array)
       end
 
       def inject_additional_attrs(node)
-        config.additional_attrs.each do |key, value|
+        @site_config.additional_attrs.each do |key, value|
           node.set_attribute(key, value)
         end
       end
 
       def nokogiri_doc
         @nokogiri_doc ||= Nokogiri::HTML(@document)
+      end
+
+      def normalize_class_array(array)
+        array.map(&:strip).uniq.join(" ")
       end
     end
   end

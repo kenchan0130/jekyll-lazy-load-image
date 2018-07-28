@@ -1,6 +1,6 @@
 ---
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.4
   Exclude:
     - bin/**/*
     - exe/**/*
@@ -9,14 +9,17 @@ AllCops:
     - vendor/**/*
     - tmp/**/*
 
+Layout/SpaceAroundOperators:
+  Enabled: false
+
 Lint/AssignmentInCondition:
   Enabled: false
 
 Metrics/AbcSize:
-  Max: 21
+  Max: 24
 
 Metrics/BlockLength:
-  Max: 80
+  Max: 150
 
 Metrics/ClassLength:
   Enabled: false

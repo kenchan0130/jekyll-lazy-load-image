@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-require "jekyll/lazy-load-image/config/ignore"
-
 module Jekyll
   module LazyLoadImage
-    class Config
-      SITE_CONFIG_KEY = "lazy_load_image"
+    class SiteConfig
+      CONFIG_KEY = "lazy_load_image"
 
       def initialize(lazy_load_image_config)
         @lazy_load_image_config = lazy_load_image_config
@@ -22,12 +20,14 @@ module Jekyll
         config_key = "class_attr_values"
         @class_attr_values ||= Array(
           @lazy_load_image_config&.[](config_key)
-        ).compact.map(&:strip)
+        ).compact
       end
 
-      def ignore
-        config = @lazy_load_image_config&.[](Ignore::CONFIG_KEY)
-        @ignore ||= Ignore.new(config)
+      def ignore_selectors
+        config_key = "ignore_selectors"
+        @ignore_selectors ||= Array(
+          @lazy_load_image_config&.[](config_key)
+        ).map(&:to_s).reject(&:empty?)
       end
 
       def preload_image
@@ -38,7 +38,7 @@ module Jekyll
       def src_attr_name
         config_key = "src_attr_name"
         @src_attr_name ||= @lazy_load_image_config&.[](config_key).to_s.strip.tap do |name|
-          raise "You must set #{config_key} config attribute of #{SITE_CONFIG_KEY}" if name.empty?
+          raise "You must set #{config_key} config attribute of #{CONFIG_KEY}" if name.empty?
         end
       end
     end
