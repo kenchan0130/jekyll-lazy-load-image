@@ -8,7 +8,9 @@ _Edit img tag optimized lazy load images for your Jekyll site_
 Add the following to your site's `Gemfile`:
 
 ```ruby
-gem 'jekyll-lazy-load-image', require: 'jekyll-lazy-load-image/auto-execution'
+group :jekyll_plugins do
+  gem 'jekyll-lazy-load-image', require: 'jekyll-lazy-load-image/auto-execution'
+end
 ```
 
 and run bundle.
