@@ -45,12 +45,8 @@ module JekyllLazyLoadImage
 
       node.set_attribute("class", "") if class_value.nil?
       node_class_attr = node.attributes["class"]
-      class_array_option = [node_class_attr.value, @site_config.class_attr_values].flatten
-      class_array = class_array_option.reject do |class_name|
-        class_name.nil? || class_name.empty?
-      end
-
-      node_class_attr.value = normalize_class_array(class_array)
+      class_array = [node_class_attr.value, @site_config.class_attr_values].flatten
+      node_class_attr.value = normalize_class_array(class_array).join(" ")
     end
 
     def inject_additional_attrs(node)
@@ -64,7 +60,7 @@ module JekyllLazyLoadImage
     end
 
     def normalize_class_array(array)
-      array.map(&:strip).uniq.join(" ")
+      array.compact.uniq.map(&:strip).reject(&:empty?)
     end
   end
 end
