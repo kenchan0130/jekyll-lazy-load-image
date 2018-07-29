@@ -2,11 +2,16 @@
 
 _Edit img tag optimized lazy load images for your Jekyll site_
 
-## Install
-
-Add `gem 'jekyll-lazy-load-image'` to your site's `Gemfile` and run bundle.
-
 ## Usage
+### `Gemfile`
+
+Add the following to your site's `Gemfile`:
+
+```ruby
+gem 'jekyll-lazy-load-image', require: 'jekyll-lazy-load-image/auto-execution'
+```
+
+and run bundle.
 
 ### `_config.yml`
 
@@ -25,30 +30,6 @@ lazy_load_image:
     "data-size": auto 
 ```
 
-### `_plugins`
-
-Add the following to your site's `_plugins/lazy-load-image.rb`:
-
-```ruby
-Jekyll::LazyLoadImage.execute
-```
-
-#### Change container
-
-If you want to change applying container, please add the following:
-
-```ruby
-Jekyll::LazyLoadImage.configure do |config|
-  config.owners = %i[posts documents]
-end
-
-Jekyll::LazyLoadImage.execute
-```
-
-Default is `:posts` only.
-
-See also: https://jekyllrb.com/docs/plugins/#hooks
-
 ### Select lazy load library
 
 Select your favorite library and add your site. For example:
@@ -56,6 +37,34 @@ Select your favorite library and add your site. For example:
   - [Echo.js](https://github.com/toddmotto/echo)
   - [TADA](https://github.com/fallroot/tada)
   
+## Custom
+### Customize container
+
+You can change applying jekyll hook container.
+This library is `:posts` by default.
+
+See also: https://jekyllrb.com/docs/plugins/#hooks
+
+#### `Gemfile`
+
+Add the following to your site's `Gemfile`:
+
+```ruby
+gem 'jekyll-lazy-load-image'
+```
+
+#### `_plugins`
+
+Add the following to your site's `_plugins`, for example create `_plugins/lazy-load-image.rb`:
+
+```ruby
+JekyllLazyLoadImage.configure do |config|
+  config.owners = %i[posts documents]
+end
+
+JekyllLazyLoadImage.execute
+```
+
 ## Development
 
 - Use `bin/setup` to setup your local development environment.

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe Jekyll::LazyLoadImage::Translator do
-  subject(:translator) { Jekyll::LazyLoadImage::Translator.new(document, site_config) }
+RSpec.describe JekyllLazyLoadImage::Translator do
+  subject(:translator) { JekyllLazyLoadImage::Translator.new(document, site_config) }
   let(:site_config) do
-    Jekyll::LazyLoadImage::SiteConfig.new(site_config_params)
+    JekyllLazyLoadImage::SiteConfig.new(site_config_params)
   end
 
   describe "#translate" do

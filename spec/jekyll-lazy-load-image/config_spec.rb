@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-RSpec.describe Jekyll::LazyLoadImage::Config do
-  subject(:config) { Jekyll::LazyLoadImage::Config.new }
+RSpec.describe JekyllLazyLoadImage::Config do
+  subject(:config) { JekyllLazyLoadImage::Config.new }
 
   describe "#owners" do
     subject { config.owners }
 
     context "when nothing has been set" do
       it "should return default value" do
-        is_expected.to eq(Jekyll::LazyLoadImage::Config::DEFAULT_CONTAINERS)
+        is_expected.to eq(JekyllLazyLoadImage::Config::DEFAULT_CONTAINERS)
       end
     end
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe Jekyll::LazyLoadImage::SiteConfig do
-  subject(:site_config) { Jekyll::LazyLoadImage::SiteConfig.new(lazy_load_image_config_params) }
+RSpec.describe JekyllLazyLoadImage::SiteConfig do
+  subject(:site_config) { JekyllLazyLoadImage::SiteConfig.new(lazy_load_image_config_params) }
 
   describe "#additional_attrs" do
     subject { site_config.additional_attrs }

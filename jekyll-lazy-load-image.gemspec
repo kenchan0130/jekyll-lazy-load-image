@@ -6,7 +6,7 @@ require "jekyll-lazy-load-image/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "jekyll-lazy-load-image"
-  spec.version       = Jekyll::LazyLoadImage::VERSION
+  spec.version       = JekyllLazyLoadImage::VERSION
   spec.authors       = ["Tadayuki Onishi"]
   spec.email         = ["tt.tanishi100@gmail.com"]
   spec.summary       = "Edit img tag optimized lazy load images for your Jekyll site"
