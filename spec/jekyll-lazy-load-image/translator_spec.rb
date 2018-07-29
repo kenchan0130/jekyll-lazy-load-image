@@ -7,7 +7,7 @@ RSpec.describe JekyllLazyLoadImage::Translator do
   end
 
   describe "#translate" do
-    subject(:a) { translator.translate }
+    subject { translator.translate }
     let(:site_config_params) do
       {
         "additional_attrs" => additional_attrs,
@@ -29,7 +29,7 @@ RSpec.describe JekyllLazyLoadImage::Translator do
       end
 
       it "should return html without changing anything" do
-        is_expected.to eq(document)
+        expect(subject.gsub(/[\r\n]/, "")).to eq(document)
       end
     end
 
@@ -40,7 +40,7 @@ RSpec.describe JekyllLazyLoadImage::Translator do
         end
 
         it "should return html without changing anything" do
-          is_expected.to eq(document)
+          expect(subject.gsub(/[\r\n]/, "")).to eq(document)
         end
       end
 
@@ -89,7 +89,7 @@ RSpec.describe JekyllLazyLoadImage::Translator do
             end
 
             it "should ignore translation" do
-              is_expected.to eq(document.tr("'", '"'))
+              expect(subject.gsub(/[\r\n]/, "")).to eq(document.tr("'", '"'))
             end
           end
 

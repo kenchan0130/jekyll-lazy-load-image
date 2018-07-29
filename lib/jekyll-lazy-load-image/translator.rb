@@ -16,7 +16,7 @@ module JekyllLazyLoadImage
         inject_class_attr(node)
         inject_additional_attrs(node)
       end
-      nokogiri_doc.to_html.gsub(/[\r\n]/, "")
+      nokogiri_doc.to_html
     end
 
     private
