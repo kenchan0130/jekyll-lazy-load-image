@@ -1,4 +1,4 @@
-# Jekyll LazyLoadImage [![Build Status](https://travis-ci.org/kenchan0130/jekyll-lazy-load-image.svg?branch=master)](https://travis-ci.org/kenchan0130/jekyll-lazy-load-image)
+# Jekyll Lazy Load Image [![Build Status](https://travis-ci.org/kenchan0130/jekyll-lazy-load-image.svg?branch=master)](https://travis-ci.org/kenchan0130/jekyll-lazy-load-image)
 
 _Edit img tag optimized lazy load images for your Jekyll site_
 
