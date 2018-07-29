@@ -4,7 +4,9 @@ sudo: false
 cache: bundler
 before_install:
   - gem update bundler
-script: "bundle exec rake spec"
+script:
+  - bundle exec rubocop
+  - bundle exec rake spec
 rvm:
   - 2.4.0
   - 2.4.1
