@@ -38,6 +38,9 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Enabled: false
 
+Naming/FileName:
+  Enabled: false
+
 Style/BlockDelimiters:
   Exclude:
     - spec/**/*
