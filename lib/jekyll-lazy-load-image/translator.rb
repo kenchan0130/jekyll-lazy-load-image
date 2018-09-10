@@ -12,6 +12,7 @@ module JekyllLazyLoadImage
     def translate
       nokogiri_doc.xpath("//img").each do |node|
         next if ignore_node?(node)
+
         apply_lazy_image_setting(node)
         inject_class_attr(node)
         inject_additional_attrs(node)

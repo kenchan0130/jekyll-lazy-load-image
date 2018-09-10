@@ -11,6 +11,7 @@ module JekyllLazyLoadImage
 
     def owners=(value)
       return if value.nil? || value.empty?
+
       @owners = Array(value).map(&:to_sym).tap do |owners_prospective|
         not_allowed_hooks = ALLOWED_JEKYLL_HOOK_CONTAINERS & owners_prospective
         raise ArgumentError, "The owners option must be #{ALLOWED_JEKYLL_HOOK_CONTAINERS.join(" or ")}." if not_allowed_hooks.size.zero?
