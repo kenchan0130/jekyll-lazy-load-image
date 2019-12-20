@@ -24,7 +24,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - weak jekyll version dependency [#11](https://github.com/kenchan0130/jekyll-lazy-load-image/pull/11) from @j1n6
 - Apply rubocop [#12](https://github.com/kenchan0130/jekyll-lazy-load-image/pull/12) from @kenchan0130
-- Support to deploy by CI [#13](https://github.com/kenchan0130/jekyll-lazy-load-image/pull/13) from @kenchan0130
+- Support to deploy by CI [#13](https://github.com/kenchan0130/jekyll-lazy-load-image/pull/13) [#14](https://github.com/kenchan0130/jekyll-lazy-load-image/pull/14) from @kenchan0130
 
 ### Deprecated
 
