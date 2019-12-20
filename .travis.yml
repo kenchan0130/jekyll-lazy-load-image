@@ -19,8 +19,6 @@ jobs:
       rvm: 2.6.5
     - stage: deploy
       rvm: 2.4.9
-      script:
-        - npm run build
       deploy:
         provider: rubygems
         skip_cleanup: true
