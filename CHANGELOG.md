@@ -17,6 +17,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Security
 
+## [0.3.2] - 2019-12-20
+### Added
+
+### Changed
+
+- FIX jekyll dependences [#15](https://github.com/kenchan0130/jekyll-lazy-load-image/pull/15) from @kenchan0130
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
 ## [0.3.1] - 2019-12-20
 ### Added
 
@@ -52,6 +67,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Security
 
 
-[Unreleased]: https://github.com/kenchan0130/jekyll-lazy-load-image/compare/v0.3.1...HEAD
+[unreleased]: https://github.com/kenchan0130/jekyll-lazy-load-image/compare/v0.3.2...HEAD
+[0.3.2]: https://github.com/kenchan0130/jekyll-lazy-load-image/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/kenchan0130/jekyll-lazy-load-image/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/kenchan0130/jekyll-lazy-load-image/compare/v0.2.1...v0.3.0
