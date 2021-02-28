@@ -14,7 +14,7 @@ module Jekyll
 
       def reset_default_value(value)
         if value.is_a?(Hash)
-          Hash[value.map { |k, v| [k, reset_default_value(v)] }]
+          value.transform_values { |v| reset_default_value(v) }
         else
           []
         end

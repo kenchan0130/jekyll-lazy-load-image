@@ -1,0 +1,82 @@
+name: Publish
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+env:
+  BUNDLE_JOBS: 4
+  BUNDLE_RETRY: 3
+  BUNDLE_PATH: vendor/bundle
+  PUBLISH_RUBY_VERSION: "2.6"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      publish: ${{ ! steps.publish.outputs.skip }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: kenchan0130/actions-system-info@v1.0.0
+        id: system-info
+      - name: Cache Ruby dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.BUNDLE_PATH }}
+          key: cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ env.PUBLISH_RUBY_VERSION }}-${{ github.sha }}
+          restore-keys: |
+            cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ env.PUBLISH_RUBY_VERSION }}-
+      - name: Setup Ruby ${{ env.PUBLISH_RUBY_VERSION }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.PUBLISH_RUBY_VERSION }}
+      - name: Install ruby gems
+        run: |
+          bundle install
+      - name: Run lint
+        run: |
+          bundle exec rubocop
+      - name: Run test
+        run: |
+          bundle exec rake spec
+      - name: Get last tag
+        id: last-tag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+      - name: Check to skip publish
+        id: publish
+        run: |
+          if [[ "${{ steps.last-tag.outputs.tag }}" -eq "v$(bundle exec rake version)" ]]; then
+            echo "::set-output name=skip::true"
+          else
+            echo "::set-output name=skip::false"
+          fi
+
+  publish:
+    needs: build
+    if: ${{ needs.build.outputs.publish }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: kenchan0130/actions-system-info@v1.0.0
+        id: system-info
+      - name: Cache Ruby dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.BUNDLE_PATH }}
+          key: cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ env.PUBLISH_RUBY_VERSION }}-${{ github.sha }}
+          restore-keys: |
+            cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ env.PUBLISH_RUBY_VERSION }}-
+      - name: Setup Ruby ${{ env.PUBLISH_RUBY_VERSION }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.PUBLISH_RUBY_VERSION }}
+      - name: Install ruby gems
+        run: |
+          bundle install
+      - name: Publish gem to rubygems
+        uses: cadwallion/publish-rubygems-action@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+          RELEASE_COMMAND: bundle exec rake release
