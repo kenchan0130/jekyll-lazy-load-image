@@ -6,7 +6,6 @@ on:
   workflow_dispatch:
 
 env:
-  BUNDLE_JOBS: 4
   BUNDLE_RETRY: 3
   BUNDLE_PATH: vendor/bundle
   PUBLISH_RUBY_VERSION: "2.6"
@@ -33,20 +32,22 @@ jobs:
           ruby-version: ${{ env.PUBLISH_RUBY_VERSION }}
       - name: Install ruby gems
         run: |
-          bundle install
+          bundle install --jobs=${{ steps.system-info.outputs.cpu-core }}
       - name: Run lint
         run: |
           bundle exec rubocop
       - name: Run test
         run: |
           bundle exec rake spec
-      - name: Get last tag
-        id: last-tag
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+      - name: Get latest tag
+        id: latest-tag
+        uses: oprypin/find-latest-tag@v1
+        with:
+          repository: ${{ github.repository }}
       - name: Check to skip publish
         id: publish
         run: |
-          if [[ "${{ steps.last-tag.outputs.tag }}" -eq "v$(bundle exec rake version)" ]]; then
+          if [[ "${{ steps.latest-tag.outputs.tag }}" = "v$(bundle exec rake version)" ]]; then
             echo "::set-output name=skip::true"
           else
             echo "::set-output name=skip::false"
@@ -73,10 +74,32 @@ jobs:
           ruby-version: ${{ env.PUBLISH_RUBY_VERSION }}
       - name: Install ruby gems
         run: |
-          bundle install
-      - name: Publish gem to rubygems
-        uses: cadwallion/publish-rubygems-action@v1.0.0
+          bundle install --jobs=${{ steps.system-info.outputs.cpu-core }}
+      - name: Set committer identity
+        run: |
+          git config --local user.name "${GITHUB_ACTOR}"
+          git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      - name: Create tag
+        run: |
+          bundle exec rake tag
+      - name: Publish to GPR
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:github: Bearer ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+          gem build *.gemspec
+          gem push --KEY github --host https://rubygems.pkg.github.com/${OWNER} *.gem
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEM_HOST_API_KEY: ${{ secrets.GPR_AUTH_TOKEN }}
+          OWNER: kenchan0130
+      - name: Publish gem to rubygems
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:rubygems_api_key: ${RUBYGEMS_API_KEY}\n" > $HOME/.gem/credentials
+          gem build *.gemspec
+          gem push *.gem
+        env:
           RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
-          RELEASE_COMMAND: bundle exec rake release

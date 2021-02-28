@@ -5,7 +5,6 @@ on:
     - cron: '0 0 * * *'
 
 env:
-  BUNDLE_JOBS: 4
   BUNDLE_RETRY: 3
   BUNDLE_PATH: vendor/bundle
 
@@ -33,7 +32,7 @@ jobs:
           ruby-version: ${{ matrix.ruby-version }}
       - name: Install ruby gems
         run: |
-          bundle install
+          bundle install --jobs=${{ steps.system-info.outputs.cpu-core }}
       - name: Run lint
         run: |
           bundle exec rubocop
