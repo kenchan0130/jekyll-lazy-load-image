@@ -18,17 +18,19 @@ jobs:
       publish: ${{ ! steps.publish.outputs.skip }}
     steps:
       - uses: actions/checkout@v2
+      - uses: kenchan0130/actions-system-info@v1.0.0
+        id: system-info
       - name: Cache Ruby dependencies
         uses: actions/cache@v1
         with:
           path: ${{ env.BUNDLE_PATH }}
-          key: cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ matrix.ruby }}-${{ github.sha }}
+          key: cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ env.PUBLISH_RUBY_VERSION }}-${{ github.sha }}
           restore-keys: |
-            cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ matrix.ruby }}-
-      - name: Setup Ruby ${{ matrix.ruby-version }}
+            cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ env.PUBLISH_RUBY_VERSION }}-
+      - name: Setup Ruby ${{ env.PUBLISH_RUBY_VERSION }}
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby-version }}
+          ruby-version: ${{ env.PUBLISH_RUBY_VERSION }}
       - name: Install ruby gems
         run: |
           bundle install
@@ -65,7 +67,7 @@ jobs:
           key: cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ env.PUBLISH_RUBY_VERSION }}-${{ github.sha }}
           restore-keys: |
             cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ env.PUBLISH_RUBY_VERSION }}-
-      - name: Setup Ruby
+      - name: Setup Ruby ${{ env.PUBLISH_RUBY_VERSION }}
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.PUBLISH_RUBY_VERSION }}

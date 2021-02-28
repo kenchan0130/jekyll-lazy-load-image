@@ -1,6 +1,8 @@
 name: CI
 on:
   pull_request:
+  schedule:
+    - cron: '0 0 * * *'
 
 env:
   BUNDLE_JOBS: 4
@@ -16,13 +18,15 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
+      - uses: kenchan0130/actions-system-info@v1.0.0
+        id: system-info
       - name: Cache Ruby dependencies
         uses: actions/cache@v1
         with:
           path: ${{ env.BUNDLE_PATH }}
-          key: cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ matrix.ruby }}-${{ github.sha }}
+          key: cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ steps.system-info.outputs.release }}-${{ matrix.ruby }}-${{ github.sha }}
           restore-keys: |
-            cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ matrix.ruby }}-
+            cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ steps.system-info.outputs.release }}-${{ matrix.ruby }}-
       - name: Setup Ruby ${{ matrix.ruby-version }}
         uses: ruby/setup-ruby@v1
         with:
