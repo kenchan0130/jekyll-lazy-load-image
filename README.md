@@ -1,8 +1,11 @@
-# Jekyll Lazy Load Image [![Build Status](https://travis-ci.org/kenchan0130/jekyll-lazy-load-image.svg?branch=master)](https://travis-ci.org/kenchan0130/jekyll-lazy-load-image) [![Join the chat at https://gitter.im/kenchan0130/jekyll-lazy-load-image](https://badges.gitter.im/kenchan0130/jekyll-lazy-load-image.svg)](https://gitter.im/kenchan0130/jekyll-lazy-load-image?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Jekyll Lazy Load Image
 
-_Edit img tag optimized lazy load images for your Jekyll site_
+[![CI](https://github.com/kenchan0130/jekyll-lazy-load-image/actions/workflows/ci.yml/badge.svg)](https://github.com/kenchan0130/jekyll-lazy-load-image/actions/workflows/ci.yml)
+
+Edit img tag optimized lazy load images for your Jekyll site
 
 ## Usage
+
 ### `Gemfile`
 
 Add the following to your site's `Gemfile`:
@@ -29,23 +32,25 @@ lazy_load_image:
     - ".ignore-lazy-image-load"
     - "/*[@class='ignore-lazy-image-load']"
   additional_attrs: # [optional] if you want to add attributes, please add key value
-    "data-size": auto 
+    "data-size": auto
 ```
 
 ### Select lazy load library
 
 Select your favorite library and add your site. For example:
-  - [lazysizes](https://github.com/aFarkas/lazysizes) [Recommend]
-  - [Echo.js](https://github.com/toddmotto/echo)
-  - [TADA](https://github.com/fallroot/tada)
-  
+
+* [lazysizes](https://github.com/aFarkas/lazysizes) [Recommend]
+* [Echo.js](https://github.com/toddmotto/echo)
+* [TADA](https://github.com/fallroot/tada)
+
 ## Custom
+
 ### Customize container
 
 You can change applying jekyll hook container.
 This library is `:posts` by default.
 
-See also: https://jekyllrb.com/docs/plugins/#hooks
+See also: [https://jekyllrb.com/docs/plugins/#hooks](https://jekyllrb.com/docs/plugins/#hooks)
 
 #### `Gemfile`
 
