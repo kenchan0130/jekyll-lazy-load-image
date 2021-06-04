@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   end
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = ">= 2.4.0"
+  spec.required_ruby_version = ">= 2.6.0"
 
   spec.add_dependency "jekyll", ">= 3.8"
   spec.add_dependency "nokogiri", "~> 1.8"
