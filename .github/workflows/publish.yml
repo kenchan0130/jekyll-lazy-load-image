@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      publish: ${{ ! steps.publish.outputs.skip }}
+      publish: ${{ steps.build.outputs.publish }}
     steps:
       - uses: actions/checkout@v2
       - uses: kenchan0130/actions-system-info@v1.0.0
@@ -44,13 +44,13 @@ jobs:
         uses: oprypin/find-latest-tag@v1
         with:
           repository: ${{ github.repository }}
-      - name: Check to skip publish
+      - name: Check publish
         id: publish
         run: |
           if [[ "${{ steps.latest-tag.outputs.tag }}" = "v$(bundle exec rake version)" ]]; then
-            echo "::set-output name=skip::true"
+            echo "::set-output name=publish::false"
           else
-            echo "::set-output name=skip::false"
+            echo "::set-output name=publish::true"
           fi
 
   publish:
