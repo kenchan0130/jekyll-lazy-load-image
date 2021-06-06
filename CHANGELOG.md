@@ -17,6 +17,36 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Security
 
+## [0.4.0] - 2021-06-06
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+* Drop support Ruby 2.4 and 2.5
+
+### Fixed
+
+### Security
+
+## [0.3.3] - 2021-03-01
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+* Use `transform_values` instead of `Hash of map`
+
+### Security
+
 ## [0.3.2] - 2019-12-20
 ### Added
 
@@ -66,8 +96,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Security
 
-
 [unreleased]: https://github.com/kenchan0130/jekyll-lazy-load-image/compare/v0.3.2...HEAD
+[0.4.0]: https://github.com/kenchan0130/jekyll-lazy-load-image/compare/v0.3.3...v0.4.0
+[0.3.3]: https://github.com/kenchan0130/jekyll-lazy-load-iMage/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/kenchan0130/jekyll-lazy-load-image/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/kenchan0130/jekyll-lazy-load-image/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/kenchan0130/jekyll-lazy-load-image/compare/v0.2.1...v0.3.0
