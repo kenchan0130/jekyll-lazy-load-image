@@ -20,7 +20,7 @@ jobs:
       - uses: kenchan0130/actions-system-info@v1.0.0
         id: system-info
       - name: Cache Ruby dependencies
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: ${{ env.BUNDLE_PATH }}
           key: cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ env.PUBLISH_RUBY_VERSION }}-${{ github.sha }}
@@ -62,7 +62,7 @@ jobs:
       - uses: kenchan0130/actions-system-info@v1.0.0
         id: system-info
       - name: Cache Ruby dependencies
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: ${{ env.BUNDLE_PATH }}
           key: cache-${{ runner.os }}-${{ steps.system-info.outputs.release }}-${{ env.PUBLISH_RUBY_VERSION }}-${{ github.sha }}
