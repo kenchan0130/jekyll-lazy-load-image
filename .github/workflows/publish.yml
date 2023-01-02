@@ -17,7 +17,7 @@ jobs:
       publish: ${{ steps.build.outputs.publish }}
     steps:
       - uses: actions/checkout@v3.1.0
-      - uses: kenchan0130/actions-system-info@v1.0.0
+      - uses: kenchan0130/actions-system-info@v1.1.0
         id: system-info
       - name: Cache Ruby dependencies
         uses: actions/cache@v3.2.1
@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.1.0
-      - uses: kenchan0130/actions-system-info@v1.0.0
+      - uses: kenchan0130/actions-system-info@v1.1.0
         id: system-info
       - name: Cache Ruby dependencies
         uses: actions/cache@v3.2.1
