@@ -16,7 +16,7 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3.1.0
+      - uses: actions/checkout@v3.5.0
       - uses: kenchan0130/actions-system-info@v1.0.0
         id: system-info
       - name: Cache Ruby dependencies
